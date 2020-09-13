@@ -2,6 +2,8 @@ var conn = require('./../inc/db');
 var express = require('express');
 var menus = require('./../inc/menus');
 var services = require('./../inc/services');
+var produtos = require('./../inc/produtos');
+var home = require('./../inc/home');
 var reservations = require('./../inc/reservations');
 var contacts = require('./../inc/contacts');
 var router = express.Router();
@@ -113,6 +115,37 @@ router.post('/reservations', function(req, res, next) {
     }
 });
 
+router.use(function(req, res, next) {
 
+  req.menus = menus.getMenus();
+  next();
+})
+
+router.use(function(req, res, next) {
+
+  req.produtos = produtos.getProdutos();
+  next();
+})
+
+router.use(function(req, res, next) {
+  
+  req.services = services.getServices();
+  next();
+})
+
+
+router.get('/teste', function(req, res, next) {
+
+  menus.getMenus().then(results => {
+
+    res.render('teste', {
+      title: 'Potência!',
+      banner: 'images/lagoa.jpg',
+      h1: 'Lonas e Revestimentos!',
+      products: results,
+      services: results
+    });
+  });
+});
 
 module.exports = router;

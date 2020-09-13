@@ -127,33 +127,7 @@ router.get("/emails", function(req, res, next) {
     res.render("admin/emails", admin.getParams(req));
 });
 
-router.use(function(req, res, next) {
 
-    req.products = menus.getMenus();
-    next();
-  })
-  
-  router.use(function(req, res, next) {
-    
-    req.services = services.getServices();
-    next();
-  })
-  
-  
-  router.get('/teste', function(req, res, next) {
-  
-    menus.getMenus().then(results => {
-  
-      res.render('admin/teste', {
-        title: 'Potência!',
-        banner: 'images/lagoa.jpg',
-        h1: 'Lonas e Revestimentos!',
-        products: results,
-        services: results
-      });
-    });
-  });
-  
 
 
 module.exports = router;
