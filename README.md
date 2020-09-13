@@ -1,0 +1,2 @@
+# potencia-dois
+potencia último
